@@ -33,7 +33,7 @@ Before importing data inspect its latest canonical branch, source code and schem
 ## Implementation progress (VOTE-1 candidate)
 
 - **VOTE-0** design lock: merged in PR #1.
-- **VOTE-1** scaffold/CI: under review in a separate implementation branch; no voting or login endpoints.
+- **VOTE-1** scaffold/CI: PR #2 **OPEN / CI FRONTEND BUILD BLOCKED**; no voting or login endpoints. See [CI investigation](docs/VOTE_1_CI_INVESTIGATION.md).
 - Frontend: React/TypeScript/Vite Thai mobile-first landing indicating voting is not open.
 - Backend: PHP `GET api/?action=health` reports PHP liveness with `votingEnabled:false`; `action=ready` checks a separately configured test DB/bootstrap only.
 - Repository smoke checks: `npm test`, `npm run build`, `php tests/php_contract_test.php`; isolated MariaDB smoke test runs in CI.

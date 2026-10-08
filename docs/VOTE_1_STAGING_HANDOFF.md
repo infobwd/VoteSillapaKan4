@@ -65,3 +65,12 @@ PHP receives `VOTE_DB_HOST, VOTE_DB_PORT, VOTE_DB_NAME, VOTE_DB_USER, VOTE_DB_PA
 - VOTE-2 designs full migration and catalog/round tables; VOTE-3 designs authenticated sessions and authorization before any vote endpoints.
 - Validate actual shared-host PHP/PDO MySQL extensions, APP_BASE, webroot and HTTPS in isolated staging.
 - If supporting same-host subpaths, browser storage/session namespaces must not overlap with other production apps.
+
+
+## CI status / known blocker — 2026-10-08
+
+**VOTE-1 is NOT accepted** while the `frontend` job fails. PHP lint/API contract and isolated MariaDB CI have succeeded, and locked dependency installation, Node scaffold tests and TypeScript typecheck have passed. However the Vite 7.1.7 build hangs at `transforming...` and times out. Do not merge until a complete root AND subpath build succeeds.
+
+Diagnostics: Vite minimal HTML/JS and DOM-only app build in <1s; full React app hangs even without CSS. Isolated comparison with Vite 6.3.6 and Rollup 4.42.0 also hung. This narrows the problem to the React/module bundling graph or toolchain interaction, **not** a confirmed version-specific root cause. Keep testing without changing Production, and do not treat shortened timeout as remediation.
+
+See [VOTE_1_CI_INVESTIGATION.md](VOTE_1_CI_INVESTIGATION.md) for reproducible evidence and next steps.
