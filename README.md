@@ -70,3 +70,10 @@ Approved eligible clusters, exact activity-level selection, quorum threshold and
 - [CI investigation](docs/VOTE_1_CI_INVESTIGATION.md) และ [isolated staging handoff](docs/VOTE_1_STAGING_HANDOFF.md) มีรายละเอียดและขอบเขต.
 - ทั้งระบบฐานข้อมูล/บัญชีผู้ใช้ การเลือกตัวเลือกจากเกณฑ์ครั้งที่ 70 และระบบโหวตจริงเป็นงาน VOTE-2/VOTE-3 แยก PR. Data source ครั้งที่ 70 ยังคงเป็นตัวเลือกอิสระ ไม่ต้องจับคู่กับครั้งที่ 73/74.
 - **ไม่มีการ Deploy / ไม่ใช่ Production GO**; โปรดดู CI ล่าสุดของ PR #2 ก่อนอนุมัติ Merge.
+
+
+## VOTE-2C1 (read-only archival option viewer, no votes)
+
+The home page includes an accessible, filterable read-only preview of **126 preliminary source options** from Sillapa 70/2565, including category/grade/source-PDF link, 12 items per page and clear `รอตรวจสอบ` status. It is NOT a live ballot or approval interface; 5 categories await subtype-level extraction and no current #74 rules are inferred. VOTE-2C2 admin review and VOTE-3 login/voting are future phases.
+
+CI tests the viewer with `npm test`, root/subpath production asset builds, PHP read-only API and isolated DB. No server deployment is included.
