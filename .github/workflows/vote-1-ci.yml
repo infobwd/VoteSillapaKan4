@@ -86,3 +86,33 @@ jobs:
         run: |
           npm install --no-save --no-audit --no-fund vite@6.3.6
           timeout 35s npx vite build
+
+  isolate-vite-transform:
+    name: Diagnostic source graph probe (temporary)
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Isolate Vite transform with temporary checkout-only files
+        run: |
+          mkdir -p .ci-probe
+          printf '<!doctype html><html><body><script type="module" src="./entry.js"></script></body></html>\n' > .ci-probe/index.html
+          printf 'console.log("probe ok");\n' > .ci-probe/entry.js
+          echo "::group::MINIMAL BUILD"
+          timeout 16s npx vite build .ci-probe --outDir out || echo "MINIMAL_PROBE_FAILED:$?"
+          echo "::endgroup::"
+          cp src/main.tsx .ci-main-original.tsx
+          printf 'document.getElementById("root").textContent = "Probe";\n' > src/main.tsx
+          echo "::group::NO REACT BUILD"
+          timeout 16s npx vite build || echo "NO_REACT_PROBE_FAILED:$?"
+          echo "::endgroup::"
+          mv .ci-main-original.tsx src/main.tsx
+          sed -i "/import '.\/styles.css';/d" src/main.tsx
+          echo "::group::REACT WITHOUT CSS BUILD"
+          timeout 16s npx vite build || echo "REACT_NO_CSS_FAILED:$?"
+          echo "::endgroup::"
