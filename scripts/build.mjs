@@ -19,6 +19,7 @@ const result=await build({
   target:['es2022'],
   jsx:'automatic',
   minify:true,
+  charset:'utf8',
   sourcemap:false,
   metafile:true,
   entryNames:'main-[hash]',
