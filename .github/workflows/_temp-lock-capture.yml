@@ -1,0 +1,18 @@
+name: Temporary lockfile capture
+on:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Resolve dependencies and output review-only lock
+        run: |
+          npm install --no-audit --no-fund
+          node -e "const s=require('fs').readFileSync('package-lock.json').toString('base64');for(let i=0;i<s.length;i+=3000)console.log('VOTE_LOCK:'+s.slice(i,i+3000))"
