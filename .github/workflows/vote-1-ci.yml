@@ -20,6 +20,10 @@ jobs:
           node-version: '22'
       - name: Install pinned top-level dependencies
         run: npm install --no-audit --no-fund
+      - name: Capture resolved lockfile for review (temporary)
+        if: github.event_name == 'pull_request'
+        run: |
+          node -e "const s=require('fs').readFileSync('package-lock.json').toString('base64');for(let i=0;i<s.length;i+=3000)console.log('VOTE_LOCK:'+s.slice(i,i+3000))"
       - name: Static scaffold tests
         run: npm test
       - name: Root-path production build
