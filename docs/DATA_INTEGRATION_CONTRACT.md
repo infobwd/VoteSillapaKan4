@@ -87,8 +87,16 @@ Before implementation of import ETL:
 - Back up and restore separately; secrets and real CSV data excluded from repository.
 - To build the future competition setup, export **certified aggregate decision list** for a person to review; never update 74 activities automatically without an explicit integration/change-approval project.
 
-## 9. Additional historical criteria candidate source — Sillapa 70
 
-[Historical Sillapa 70 catalog integration](SILLAPA70_CATALOG_INTEGRATION.md) adds a **second supplementary historical source**, separate from AcademicCompetitionManager canonical activities. The historical PDF-derived `candidate_id` is not an `activity_id`. Import must reconcile each candidate into MATCHED (existing canonical activity × level), NEW_APPROVED (explicitly new canonical identity), or EXCLUDED (not applicable). The VOTE-2 admin preview must display source links and prevent duplicates before creating approved `round_items`.
+## 9. Updated contract — archived #70 options independent of AcademicCompetitionManager (Owner 2026-10-08)
 
-As of 2026-10-08 only 13/18 PDF categories have partial candidate extraction. No `eligible_for_live_vote` flag may be toggled from file import alone. Special education source structure needs independent scope/age/disability design review. Do not import PDF full texts or alter Production 73.
+**Only competition-source activity/level imports** require ActivityCompetitionManager canonical `activity_id` + `level_code` per §§1–8. The historical #70 catalog is a **separate option origin** and must not require a crosswalk, CSV/SQL export or any connection to Production 73.
+
+- Archived rule70 option: `option_id=rule70:<source candidate_id>`, `origin=sillapa70`, historical source PDF and document page, activity/title/category/level snapshot. `source_activity_id` is **NULL / N/A**.
+- Later competition catalog option (if used): its own namespace and preserved source IDs; no auto matching to rule70.
+- The voting round uses `(round_id, option_id)` as the unique item. A cluster submission uniquely keys `(round_id, option_id, cluster_id)`.
+- A similarly named item from different origins remains distinct. Admin-controlled inclusion, with source warning, prevents accidental duplication; no name-based merge.
+- Historical candidates are **review-only** until source PDF, level/variant/school-scope and authorization confirmed. 126 partial staged items do not automatically enter live rounds.
+- No source-system writes of any kind.
+
+See [SILLAPA70_CATALOG_INTEGRATION.md](SILLAPA70_CATALOG_INTEGRATION.md) and [VOTE-2B source options](VOTE_2B_SOURCES_AND_CROSSWALK.md).

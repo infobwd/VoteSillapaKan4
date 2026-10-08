@@ -50,4 +50,13 @@ Approved eligible clusters, exact activity-level selection, quorum threshold and
 - [126 candidate activity × level rows (DRAFT/PARTIAL)](catalog/rule70/candidate_items.json) ครอบคลุมบางรายการใน 13/18 หมวด **ไม่ใช่รายการทั้งหมด**
 - ตรวจด้วย `node tools/validate_rule70_catalog.mjs`; ไม่มีโหวตจริง ไม่มีการเขียนฐานข้อมูล
 
-**ห้ามนำรายการเกณฑ์ 70 ไปโหวตจริงหรือใช้แทนเกณฑ์ครั้งที่ 74 จนกว่าจะตรวจหมวดที่เหลือ เทียบกิจกรรมครั้งที่ 73/74 และรับรองรอบโดยเจ้าหน้าที่.**
+**รายการครั้งที่ 70 เป็นตัวเลือกอิสระ ไม่ต้องเทียบรหัสกิจกรรมครั้งที่ 73/74** แต่ต้องตรวจชื่อ/ช่วงชั้น/ขอบเขตและรับรองรายการก่อนเปิดโหวตจริง
+
+
+## VOTE-2B — Historic Rule70 independent option proposals (Owner 2026-10-08)
+
+- **126 unapproved standalone choices** from #70 source: [option_proposals_v2b.json](catalog/rule70/option_proposals_v2b.json) with distinct `option_id=rule70:s70-...`, historical PDF link, category and level.
+- **No #73/#74 ID mapping and no production/master data export are required.** `node tools/prepare_rule70_options.mjs` regenerates the review-only catalog; CI checks provenance and all options stay disabled until admin review.
+- [18-source coverage](catalog/rule70/source_coverage_v2b.json), [37 extra parent families](catalog/rule70/additional_families_v2b.json), [VOTE-2B review and limitations](docs/VOTE_2B_SOURCES_AND_CROSSWALK.md).
+- A list entry becomes a voting question only after admin validates the source/level/scope and explicitly includes it in a round. Historical rules must not be represented as official #74 scoring criteria.
+- VOTE-1 PR #2 still has an unrelated Vite build blocker, so this data stream is not deployed.

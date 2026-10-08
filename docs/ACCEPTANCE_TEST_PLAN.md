@@ -86,9 +86,19 @@ For this PR, the only valid checks are: all expected markdown files present, int
 | ID | Scenario | Expected |
 | --- | --- | --- |
 | CAT-29 | import historical #70 candidate without review | rejected from real round; remains preview/draft |
-| CAT-30 | #70 item matches existing #73/#74 canonical activity + level | one ballot card with merged provenance; no duplicate voting |
+| CAT-30 | #70 source item has a similar name/level as a later competition-source item | retain separate namespaced option IDs; admin explicitly decides inclusion; never auto-merge |
 | CAT-31 | candidate has ambiguous level or สพป./สพม. scope | holds for manual review |
 | CAT-32 | special education item uses disability/age splits | no flattening into generic item without approved scope |
 | CAT-33 | regional northeast-only source | excluded from Kanchanaburi area by default |
 | CAT-34 | report includes archival source title/PDF/page | provenance visible, #70 not mislabeled as #74 rules |
 | CAT-35 | new authoritative #74 catalog differs from #70 | immutable round snapshots unchanged; future draft reconciliation required |
+
+
+## 8. Owner change — archived source-specific option identity
+
+- CAT-36: `rule70:` option proposal generated without any `activity_id` from #73/#74, real master export or database connection.
+- CAT-37: 126 draft options have separate stable source IDs, historical edition/year and PDF provenance; all `is_live_ballot_item=false`.
+- CAT-38: source family without reviewed level/age/disability subtype stays outside ballot candidate list.
+- CAT-39: two same-name proposals from distinct sources do not auto-collapse, their inclusion is manual and clearly source-labeled.
+- CAT-40: approved round-item and ballot server unique keys use `option_id` and enforce one vote per cluster/source option.
+- CAT-41: historical rule70 items never become live by copying data files; signed policy, eligibility roster and item review remain blockers.
