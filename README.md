@@ -41,3 +41,13 @@ New development happens in reviewed PRs with synthetic automated tests. No code 
 ## Open decisions before a real vote
 
 Approved eligible clusters, exact activity-level selection, quorum threshold and treatment of abstentions, tie rule, opening/closing window, activities mandated by regulations, official certifier and publication permission. See [Policy Approval Checklist](docs/VOTING_POLICY.md).
+
+## เพิ่มแหล่งรายการโหวตจากเกณฑ์ครั้งที่ 70 (ปีการศึกษา 2565)
+
+เพิ่ม [Historical Rule 70 catalog integration](docs/SILLAPA70_CATALOG_INTEGRATION.md) เป็นข้อมูลย้อนหลังสำหรับเสนอรายการกิจกรรมและช่วงชั้น (Option A) พร้อมลิงก์เกณฑ์ต้นทาง:
+
+- [18 PDF category sources](catalog/rule70/source_documents.json), แยกเอกสารท้องถิ่นภาคอีสานออกจาก scope ของเขต 4
+- [126 candidate activity × level rows (DRAFT/PARTIAL)](catalog/rule70/candidate_items.json) ครอบคลุมบางรายการใน 13/18 หมวด **ไม่ใช่รายการทั้งหมด**
+- ตรวจด้วย `node tools/validate_rule70_catalog.mjs`; ไม่มีโหวตจริง ไม่มีการเขียนฐานข้อมูล
+
+**ห้ามนำรายการเกณฑ์ 70 ไปโหวตจริงหรือใช้แทนเกณฑ์ครั้งที่ 74 จนกว่าจะตรวจหมวดที่เหลือ เทียบกิจกรรมครั้งที่ 73/74 และรับรองรอบโดยเจ้าหน้าที่.**

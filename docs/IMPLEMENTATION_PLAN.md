@@ -132,3 +132,13 @@ Option B stage-selection, Option C venue/host selection, integration that writes
 3. Treat Design Lock + Policy Ratification Gate as constraints.
 4. Begin only VOTE-1 on feature branch, add tests, open PR, request review; no auto-merge/deploy.
 5. If business policy remains unsigned, implement synthetic tests and READY guards but do not enable real OPEN.
+
+## 9. Additional dependency — VOTE-2A historical rules catalog
+
+Source: https://sillapa.net/home/sillapa70-rule/ — the 18 primary PDFs are archived rules for competition #70 / academic year 2565, **not authoritative #74 rules**.
+
+- **VOTE-2A (source evidence/data PR, parallel to VOTE-1):** register 18 sources, stage partial activity-level candidates with provenance, add offline data integrity CI. These do not belong in voting rounds yet.
+- **VOTE-2B (after VOTE-1 CI green/merged):** complete extraction/review for all PDF categories, verify scope and all levels against PDFs, compare AcademicCompetitionManager #73/#74 source catalogs, reconcile duplicate/superseded IDs and approve canonical candidates.
+- **VOTE-2C:** admin preview and controlled opt-in into frozen round item snapshot. Until B complete, imported draft must be excluded from real vote.
+- No automatic PDF scraping in user browser, no direct DB writes into AcademicCompetitionManager, no copying entire rule PDFs into public repo.
+- See [SILLAPA70_CATALOG_INTEGRATION.md](SILLAPA70_CATALOG_INTEGRATION.md) for remaining categories and safeguards.
