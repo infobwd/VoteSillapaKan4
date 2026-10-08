@@ -17,7 +17,7 @@ Date: 2026-10-08. Status: **Repository implementation candidate only — NOT PRO
 git fetch origin
 git switch main
 git pull --ff-only
-npm install
+npm ci
 npm run dev
 npm test
 npm run build
@@ -61,7 +61,7 @@ PHP receives `VOTE_DB_HOST, VOTE_DB_PORT, VOTE_DB_NAME, VOTE_DB_USER, VOTE_DB_PA
 
 ## Caveats / TODO for next PR
 
-- Add and commit a **resolved dependency lockfile** before final VOTE-1 merge if possible; current CI's `npm install` resolves transitive dependencies at run time. A lockfile and `npm ci` should become a hard gate before production rollout.
+- The committed `package-lock.json` is the resolved dependency baseline. CI and local setup use `npm ci`; keep the lockfile in sync with `package.json` for future dependency updates.
 - VOTE-2 designs full migration and catalog/round tables; VOTE-3 designs authenticated sessions and authorization before any vote endpoints.
 - Validate actual shared-host PHP/PDO MySQL extensions, APP_BASE, webroot and HTTPS in isolated staging.
 - If supporting same-host subpaths, browser storage/session namespaces must not overlap with other production apps.

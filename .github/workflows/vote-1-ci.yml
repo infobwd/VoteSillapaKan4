@@ -18,16 +18,12 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Install pinned top-level dependencies
-        run: npm install --no-audit --no-fund
-      - name: Capture resolved lockfile for review (temporary)
-        if: github.event_name == 'pull_request'
-        run: |
-          node -e "const s=require('fs').readFileSync('package-lock.json').toString('base64');for(let i=0;i<s.length;i+=3000)console.log('VOTE_LOCK:'+s.slice(i,i+3000))"
+      - name: Install exact locked dependencies
+        run: npm ci --no-audit --no-fund
       - name: Static scaffold tests
         run: npm test
       - name: Root-path production build
-        run: npm run build
+        run: timeout 120s npm run build
       - name: Subpath production build
         run: APP_BASE=/vote-staging/ npm run build
       - name: Assert no votes or admin bundle endpoints
