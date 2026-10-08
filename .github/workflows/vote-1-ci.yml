@@ -22,8 +22,11 @@ jobs:
         run: npm ci --no-audit --no-fund
       - name: Static scaffold tests
         run: npm test
-      - name: Root-path production build
-        run: timeout 120s npm run build
+      - name: Inspect JSX/TSX toolchain
+        run: |
+          timeout 15s node --input-type=module -e "import('esbuild').then(async m => {const v=await m.transform('const A = () => <div>ok</div>',{loader:'tsx',format:'esm'});console.log('esbuild transform ok:',v.code.length)})"
+      - name: Root-path production build with diagnostics
+        run: timeout 45s npm run build -- --debug
       - name: Subpath production build
         run: APP_BASE=/vote-staging/ npm run build
       - name: Assert no votes or admin bundle endpoints
