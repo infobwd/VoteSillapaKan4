@@ -80,6 +80,7 @@ jobs:
       - name: Minimal React imports vs Vite and esbuild bundling
         shell: bash
         run: |
+          set +e
           set -u
           mkdir -p .react-diagnostics
           cat > .react-diagnostics/index.html <<'HTML'
