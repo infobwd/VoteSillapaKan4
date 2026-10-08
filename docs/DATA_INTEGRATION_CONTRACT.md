@@ -86,3 +86,9 @@ Before implementation of import ETL:
 - Votes, revisions, policies, decisions, audit = authoritative in VoteSillapaKan4 only.
 - Back up and restore separately; secrets and real CSV data excluded from repository.
 - To build the future competition setup, export **certified aggregate decision list** for a person to review; never update 74 activities automatically without an explicit integration/change-approval project.
+
+## 9. Additional historical criteria candidate source — Sillapa 70
+
+[Historical Sillapa 70 catalog integration](SILLAPA70_CATALOG_INTEGRATION.md) adds a **second supplementary historical source**, separate from AcademicCompetitionManager canonical activities. The historical PDF-derived `candidate_id` is not an `activity_id`. Import must reconcile each candidate into MATCHED (existing canonical activity × level), NEW_APPROVED (explicitly new canonical identity), or EXCLUDED (not applicable). The VOTE-2 admin preview must display source links and prevent duplicates before creating approved `round_items`.
+
+As of 2026-10-08 only 13/18 PDF categories have partial candidate extraction. No `eligible_for_live_vote` flag may be toggled from file import alone. Special education source structure needs independent scope/age/disability design review. Do not import PDF full texts or alter Production 73.

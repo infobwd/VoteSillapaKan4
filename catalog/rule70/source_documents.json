@@ -1,0 +1,185 @@
+{
+  "schema_version": "1.0",
+  "source_edition": "งานศิลปหัตถกรรมนักเรียน ครั้งที่ 70",
+  "academic_year_be": 2565,
+  "index_url": "https://sillapa.net/home/sillapa70-rule/",
+  "fetched_as_references_on": "2026-10-08",
+  "category_count": 18,
+  "review_status": "REFERENCE_ONLY_NOT_74_APPROVED",
+  "categories": [
+    {
+      "source_category_id": "thai",
+      "ordinal": 1,
+      "category_name": "ภาษาไทย",
+      "document_url": "https://www.sillapa.net/rule70/thai-70.pdf?141122=",
+      "review_status": "HISTORICAL_REVIEW_REQUIRED",
+      "future_vote_item_policy": "ACTIVITY_TIMES_LEVEL_NOT_CATEGORY",
+      "eligibility": "NOT_ELIGIBLE_UNTIL_REVIEW"
+    },
+    {
+      "source_category_id": "math",
+      "ordinal": 2,
+      "category_name": "คณิตศาสตร์",
+      "document_url": "https://www.sillapa.net/rule70/math-70.pdf",
+      "review_status": "HISTORICAL_REVIEW_REQUIRED",
+      "future_vote_item_policy": "ACTIVITY_TIMES_LEVEL_NOT_CATEGORY",
+      "eligibility": "NOT_ELIGIBLE_UNTIL_REVIEW"
+    },
+    {
+      "source_category_id": "science",
+      "ordinal": 3,
+      "category_name": "วิทยาศาสตร์",
+      "document_url": "https://www.sillapa.net/rule70/science-70.pdf?151122=",
+      "review_status": "HISTORICAL_REVIEW_REQUIRED",
+      "future_vote_item_policy": "ACTIVITY_TIMES_LEVEL_NOT_CATEGORY",
+      "eligibility": "NOT_ELIGIBLE_UNTIL_REVIEW"
+    },
+    {
+      "source_category_id": "pilot",
+      "ordinal": 4,
+      "category_name": "นักบินน้อย สพฐ.",
+      "document_url": "https://www.sillapa.net/rule70/pilot-70.pdf?231122=",
+      "review_status": "HISTORICAL_REVIEW_REQUIRED",
+      "future_vote_item_policy": "ACTIVITY_TIMES_LEVEL_NOT_CATEGORY",
+      "eligibility": "NOT_ELIGIBLE_UNTIL_REVIEW"
+    },
+    {
+      "source_category_id": "social",
+      "ordinal": 5,
+      "category_name": "สังคมศึกษา ศาสนาและวัฒนธรรม",
+      "document_url": "https://www.sillapa.net/rule70/social-70.pdf",
+      "review_status": "HISTORICAL_REVIEW_REQUIRED",
+      "future_vote_item_policy": "ACTIVITY_TIMES_LEVEL_NOT_CATEGORY",
+      "eligibility": "NOT_ELIGIBLE_UNTIL_REVIEW"
+    },
+    {
+      "source_category_id": "health",
+      "ordinal": 6,
+      "category_name": "สุขศึกษาและพลศึกษา",
+      "document_url": "https://www.sillapa.net/rule70/health-70.pdf",
+      "review_status": "HISTORICAL_REVIEW_REQUIRED",
+      "future_vote_item_policy": "ACTIVITY_TIMES_LEVEL_NOT_CATEGORY",
+      "eligibility": "NOT_ELIGIBLE_UNTIL_REVIEW"
+    },
+    {
+      "source_category_id": "visual",
+      "ordinal": 7,
+      "category_name": "ศิลปะ–ทัศนศิลป์",
+      "document_url": "https://www.sillapa.net/rule70/vis-art-70.pdf?191122=",
+      "review_status": "HISTORICAL_REVIEW_REQUIRED",
+      "future_vote_item_policy": "ACTIVITY_TIMES_LEVEL_NOT_CATEGORY",
+      "eligibility": "NOT_ELIGIBLE_UNTIL_REVIEW"
+    },
+    {
+      "source_category_id": "music",
+      "ordinal": 8,
+      "category_name": "ศิลปะ–ดนตรี",
+      "document_url": "https://www.sillapa.net/rule70/mu-art-70.pdf?2211651=",
+      "review_status": "HISTORICAL_REVIEW_REQUIRED",
+      "future_vote_item_policy": "ACTIVITY_TIMES_LEVEL_NOT_CATEGORY",
+      "eligibility": "NOT_ELIGIBLE_UNTIL_REVIEW"
+    },
+    {
+      "source_category_id": "dance",
+      "ordinal": 9,
+      "category_name": "ศิลปะ–นาฏศิลป์",
+      "document_url": "https://www.sillapa.net/rule70/ac-art-70.pdf",
+      "review_status": "HISTORICAL_REVIEW_REQUIRED",
+      "future_vote_item_policy": "ACTIVITY_TIMES_LEVEL_NOT_CATEGORY",
+      "eligibility": "NOT_ELIGIBLE_UNTIL_REVIEW"
+    },
+    {
+      "source_category_id": "foreign",
+      "ordinal": 10,
+      "category_name": "ภาษาต่างประเทศ",
+      "document_url": "https://www.sillapa.net/rule70/english-70.pdf?251122=",
+      "review_status": "HISTORICAL_REVIEW_REQUIRED",
+      "future_vote_item_policy": "ACTIVITY_TIMES_LEVEL_NOT_CATEGORY",
+      "eligibility": "NOT_ELIGIBLE_UNTIL_REVIEW"
+    },
+    {
+      "source_category_id": "learner",
+      "ordinal": 11,
+      "category_name": "กิจกรรมพัฒนาผู้เรียน",
+      "document_url": "https://www.sillapa.net/rule70/activity-70.pdf?131222=",
+      "review_status": "HISTORICAL_REVIEW_REQUIRED",
+      "future_vote_item_policy": "ACTIVITY_TIMES_LEVEL_NOT_CATEGORY",
+      "eligibility": "NOT_ELIGIBLE_UNTIL_REVIEW"
+    },
+    {
+      "source_category_id": "computer",
+      "ordinal": 12,
+      "category_name": "คอมพิวเตอร์",
+      "document_url": "https://www.sillapa.net/rule70/computer-70.pdf",
+      "review_status": "HISTORICAL_REVIEW_REQUIRED",
+      "future_vote_item_policy": "ACTIVITY_TIMES_LEVEL_NOT_CATEGORY",
+      "eligibility": "NOT_ELIGIBLE_UNTIL_REVIEW"
+    },
+    {
+      "source_category_id": "robot",
+      "ordinal": 13,
+      "category_name": "หุ่นยนต์",
+      "document_url": "https://www.sillapa.net/rule70/robot-70.pdf",
+      "review_status": "HISTORICAL_REVIEW_REQUIRED",
+      "future_vote_item_policy": "ACTIVITY_TIMES_LEVEL_NOT_CATEGORY",
+      "eligibility": "NOT_ELIGIBLE_UNTIL_REVIEW"
+    },
+    {
+      "source_category_id": "career",
+      "ordinal": 14,
+      "category_name": "การงานอาชีพ",
+      "document_url": "https://www.sillapa.net/rule70/job-70.pdf",
+      "review_status": "HISTORICAL_REVIEW_REQUIRED",
+      "future_vote_item_policy": "ACTIVITY_TIMES_LEVEL_NOT_CATEGORY",
+      "eligibility": "NOT_ELIGIBLE_UNTIL_REVIEW"
+    },
+    {
+      "source_category_id": "preschool",
+      "ordinal": 15,
+      "category_name": "ปฐมวัย",
+      "document_url": "https://www.sillapa.net/rule70/preschool-70.pdf",
+      "review_status": "HISTORICAL_REVIEW_REQUIRED",
+      "future_vote_item_policy": "ACTIVITY_TIMES_LEVEL_NOT_CATEGORY",
+      "eligibility": "NOT_ELIGIBLE_UNTIL_REVIEW"
+    },
+    {
+      "source_category_id": "inclusion",
+      "ordinal": 16,
+      "category_name": "การศึกษาพิเศษ (โรงเรียนเรียนรวม)",
+      "document_url": "https://www.sillapa.net/rule70/special-70.pdf?191122=",
+      "review_status": "SPECIAL_SCOPE_REVIEW_REQUIRED",
+      "future_vote_item_policy": "ACTIVITY_TIMES_LEVEL_NOT_CATEGORY",
+      "eligibility": "NOT_ELIGIBLE_UNTIL_REVIEW"
+    },
+    {
+      "source_category_id": "disability",
+      "ordinal": 17,
+      "category_name": "การศึกษาพิเศษ (โรงเรียนเฉพาะความพิการ)",
+      "document_url": "https://www.sillapa.net/rule70/ss-70.pdf?191165=",
+      "review_status": "SPECIAL_SCOPE_REVIEW_REQUIRED",
+      "future_vote_item_policy": "ACTIVITY_TIMES_LEVEL_NOT_CATEGORY",
+      "eligibility": "NOT_ELIGIBLE_UNTIL_REVIEW"
+    },
+    {
+      "source_category_id": "center",
+      "ordinal": 18,
+      "category_name": "การศึกษาพิเศษ (ศูนย์การศึกษาพิเศษ)",
+      "document_url": "https://www.sillapa.net/rule70/c-ss-70.pdf",
+      "review_status": "SPECIAL_SCOPE_REVIEW_REQUIRED",
+      "future_vote_item_policy": "ACTIVITY_TIMES_LEVEL_NOT_CATEGORY",
+      "eligibility": "NOT_ELIGIBLE_UNTIL_REVIEW"
+    }
+  ],
+  "separate_regional_source": {
+    "title": "กิจกรรมท้องถิ่นภาคตะวันออกเฉียงเหนือ (ศิลปวัฒนธรรมอีสาน)",
+    "document_url": "https://www.sillapa.net/rule70/esanmusic-70.pdf",
+    "include_by_default": false,
+    "reason": "ไม่ใช่เกณฑ์การแข่งขันทั่วไปของ สพป.กาญจนบุรี เขต 4 ต้องได้รับอนุมัติแยกถ้าจะนำมาใช้"
+  },
+  "warnings": [
+    "เป็นเกณฑ์ครั้งที่ 70 ปีการศึกษา 2565 ไม่ใช่เกณฑ์ที่อนุมัติสำหรับครั้งที่ 74",
+    "เป็นเอกสารอ้างอิง ไม่ใช่ฐานข้อมูลลงคะแนนจริง",
+    "หมวดการศึกษาพิเศษใช้การแยกรายการตามประเภทความพิการ/ช่วงอายุ จึงต้องทบทวน schema แยก",
+    "ต้องตรวจปีเกณฑ์ใหม่และเทียบรายการครั้งที่ 73/74 โดยผู้รับผิดชอบก่อนเปิดโหวต"
+  ]
+}

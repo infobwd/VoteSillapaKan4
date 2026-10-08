@@ -80,3 +80,15 @@ Preconditions:
 ## 6. Docs-only PR verification
 
 For this PR, the only valid checks are: all expected markdown files present, internal links resolve, scope/terminology consistent, no secrets/real data, changed paths limited to README.md and docs/*.md, no runtime behavior claims, no CI claims unless CI actually exists. Actual functional test cases remain **NOT RUN / FUTURE**.
+
+## 7. Historical rules catalog candidate tests (new requirements)
+
+| ID | Scenario | Expected |
+| --- | --- | --- |
+| CAT-29 | import historical #70 candidate without review | rejected from real round; remains preview/draft |
+| CAT-30 | #70 item matches existing #73/#74 canonical activity + level | one ballot card with merged provenance; no duplicate voting |
+| CAT-31 | candidate has ambiguous level or สพป./สพม. scope | holds for manual review |
+| CAT-32 | special education item uses disability/age splits | no flattening into generic item without approved scope |
+| CAT-33 | regional northeast-only source | excluded from Kanchanaburi area by default |
+| CAT-34 | report includes archival source title/PDF/page | provenance visible, #70 not mislabeled as #74 rules |
+| CAT-35 | new authoritative #74 catalog differs from #70 | immutable round snapshots unchanged; future draft reconciliation required |
