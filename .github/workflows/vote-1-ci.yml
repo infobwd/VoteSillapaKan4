@@ -70,3 +70,19 @@ jobs:
         run: php tests/php_contract_test.php
       - name: Verify migration on disposable MariaDB
         run: php tests/db_smoke.php
+
+  vite6-probe:
+    name: Diagnostic alternative Vite 6 build (temporary)
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install exact base dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Probe Vite 6 bundler without modifying repository dependencies
+        run: |
+          npm install --no-save --no-audit --no-fund vite@6.3.6
+          timeout 35s npx vite build
