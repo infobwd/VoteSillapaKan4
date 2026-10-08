@@ -1,96 +1,86 @@
-# VOTE-2B — Historical rule 70 source audit & crosswalk handoff
+# VOTE-2B — Source 70 independent options & coverage review
 
-Date: 8 October 2026. **Status: PRELIMINARY EVIDENCE + SAFE MATCH SUGGESTIONS ONLY; NO LIVE VOTES.**
+Updated: 2026-10-08. **Historical source only / no database writes / no live voting.**
 
-## What has actually been done
+## Owner instruction (supersedes earlier crosswalk proposal)
 
-- PR #3 (VOTE-2A) merged to `main` at `ff9a8e2`. It contains 18 source PDF links and **126 hand-staged item×level candidates from 13 categories**.
-- This VOTE-2B PR reads the original PDF overview tables and registers a **coverage worksheet for all 18 categories**: `catalog/rule70/source_coverage_v2b.json`. It carefully distinguishes an official PDF *family/item count across สพป.+สพม.* from the smaller set of vote units suitable to SPP Kanchanaburi 4.
-- `catalog/rule70/additional_families_v2b.json` adds **37 review-only family exemplars** from 5 formerly empty categories (pilot, music, 3 special-education categories); these are **NOT** ballot rows and may contain PARENT activities requiring further splitting.
-- Adds strict offline reconciliation tool `tools/reconcile_rule70.mjs` and unit tests. It accepts a privately supplied **canonical master** containing only `activity_id`, `name`, `level_code`, optional `category` / `scope`, and emits **suggestions**. It will not match on Thai name alone if the level differs, chooses none if ambiguous, never approves items.
-- CI confirms 18 source mappings, that items are blocked from live voting, and demo crosswalk decisions on synthetic master data.
+**เกณฑ์ครั้งที่ 70 เป็นเพียง “ตัวเลือก” สำหรับเสนอให้ผู้แทนกลุ่มเครือข่ายลงมติ** ไม่จำเป็นต้องจับคู่กับกิจกรรมครั้งที่ 73/74 และไม่ต้องใช้ export ฐานข้อมูลการแข่งขันเดิม.
 
-## Audit takeaways from original PDFs
+- `catalog/rule70/option_proposals_v2b.json`: 126 independently keyed **historical option proposals**; each has `option_id=rule70:<candidate_id>` and PDF provenance. They carry **no canonical activity_id**.
+- `tools/prepare_rule70_options.mjs`: deterministic generator from source documents and 126 candidate×level rows; only *draft options*, no DB, no approval, no 73 master.
+- `catalog/rule70/source_coverage_v2b.json`: 18 source category overviews with original PDF main-family counts; historical counts are not a verified number of area-level voting units.
+- `catalog/rule70/additional_families_v2b.json`: 37 review-only **family examples** across 5 categories originally empty (pilot, music, special-education 3 types). Parent families are **NOT** selectable voting questions until split/reviewed where necessary.
+- `tests/rule70_options.test.mjs` and coverage tests ensure provenance, count and non-activation.
 
-| Category | Original summary: main activities | PDF reported total entries | Caveat |
-| --- | ---: | ---: | --- |
-| ภาษาไทย | 7 | 29 | multiple school jurisdictions |
-| คณิตศาสตร์ | 8 | 34 | several similarly named project types |
-| วิทยาศาสตร์ | 5 | 20 | สพป.+สพม. combined |
-| นักบินน้อย | 6 | — | six different aircraft types and stage-levels |
-| สังคมฯ | 9 | 31 | sub-events including two chanting languages |
-| สุขศึกษา | 2 | 14 | aerobics, muay thai, sport and quiz subtypes |
-| ทัศนศิลป์ | 7 | 28 | levels for ม.1-3 may differ by สพป./สพม. |
-| ดนตรี | 10 | 99 | 10 main activity families split to many instruments, bands and genders |
-| นาฏศิลป์ | 6 | 20 | not all six available in SPP |
-| ภาษาต่างประเทศ | pending | pending | multiple languages, some upper-secondary only |
-| พัฒนาผู้เรียน | 4 | 27 | sub-events and school-division constraints |
-| คอมพิวเตอร์ | 13 | 26 | Web Applications and Motion Infographic are distinct |
-| หุ่นยนต์ | 4 | 16 | one combined 4-level × 4-family count |
-| การงานอาชีพ | pending | pending | flower, craft and cooking subtypes |
-| ปฐมวัย | 2 | 2 | distinct preschool-only scope |
-| การศึกษาพิเศษ (เรียนรวม) | 15 | 84 | disability types and school divisions; do NOT flatten |
-| การศึกษาพิเศษ (เฉพาะความพิการ) | 42 | 152 | disability×level subtasks |
-| ศูนย์การศึกษาพิเศษ | 10 | 107 | AGE (3–6, 7–12, 13–18) × disability combinations |
+Previous CSV export/crosswalk tools, scripts and operator instructions are **removed from this PR**, because they contradict the Owner's simpler requirement. The current `main` still contains historical VOTE-2A draft text anticipating matching; this PR updates its live roadmap.
 
-These numbers are taken from summary pages in original **#70/2565** PDFs and are **not** a count of #74 eligible or already-verified voter ballot items. For source PDFs see `source_coverage_v2b.json` and `source_documents.json`.
+## Historical original PDF category overview
 
-## Important discovered gaps / corrections
+| หมวดเกณฑ์ | กิจกรรมหลักที่รายงาน | รายการย่อยรวมตาม PDF |
+| --- | ---: | ---: |
+| ภาษาไทย | 7 | 29 |
+| คณิตศาสตร์ | 8 | 34 |
+| วิทยาศาสตร์ | 5 | 20 |
+| นักบินน้อย | 6 | — |
+| สังคมศึกษา | 9 | 31 |
+| สุขศึกษา | 2 | 14 |
+| ทัศนศิลป์ | 7 | 28 |
+| ดนตรี | 10 | 99 |
+| นาฏศิลป์ | 6 | 20 |
+| ภาษาต่างประเทศ | รอตรวจ | รอตรวจ |
+| พัฒนาผู้เรียน | 4 | 27 |
+| คอมพิวเตอร์ | 13 | 26 |
+| หุ่นยนต์ | 4 | 16 |
+| การงานอาชีพ | รอตรวจ | รอตรวจ |
+| ปฐมวัย | 2 | 2 |
+| การศึกษาพิเศษ เรียนรวม | 15 | 84 |
+| โรงเรียนเฉพาะความพิการ | 42 | 152 |
+| ศูนย์การศึกษาพิเศษ | 10 | 107 |
 
-1. **Original PR #3 is intentionally partial**. 126 records were manually staged and cannot be called “full extraction” or “approved”. Exact labels, source pages and checked school jurisdiction must still be audited.
-2. Pilot: six family types in PDF page 4; flying 3D and free rubber-powered variants belong to a particular level; **radio-controlled target model is upper-secondary สพม. in source**, not a vote-ready SPP item. Family `kind=SPM_ONLY_EXCLUDED` is a draft warning, not an approved exclusion.
-3. Music: original summary explicitly says **10 main families, 99 all-scope entries**. Displaying 10 parent votes would incorrectly combine diverse instruments, genders and age groups. Preserve individual subtypes before building actual ballot rows.
-4. Special education: official summary counts **15/84** (inclusive), **42/152** (specialist schools) and **10/107** (special centers). Reconciliation requires disability, age, educational jurisdiction and often team/individual subtype dimensions. Current generic key `activity_id+level_code` alone is insufficient to distinguish them. No auto mapping.
-5. **Canonical master data is missing**. The AcademicCompetitionManager `db/README.md` says real `db/seed/raw/*.csv` and `db/seed/02-seed.sql` are intentionally .gitignored because of participant PII. `db/01-schema.sql` confirms opaque VARCHAR activity IDs and many-to-one `activity_levels`. We cannot claim any **real** 73/74 ID match without an authorized, sanitized activities-and-levels export.
-6. Even exact normalized name+level is only a **review suggestion**: matching a historical title does not prove current rules or allowable school scope.
+Original #70 source index: https://sillapa.net/home/sillapa70-rule/. These counts may combine สพป./สพม.; they **cannot** be treated as a current #74 ballot count or eligibility decision. Every candidate must still have correct level/scope checked against the PDF.
 
-## Authoritative source & privacy
+## Contract — sources are independent
 
-Competition source: https://github.com/infobwd/AcademicCompetitionManager, canonical prep branch `analysis/mysql-migration` (re-check latest ref when exporting). Only sanitized **activities and activity_levels** should be exported, never contestant/team/teacher/judge tables, contact details, passwords or SQL dump. The vote project must stay physically separate and **NEVER update Production 73**.
+Two catalog origins may be presented in one round, but remain **distinct choices**:
 
-## How to run matching with a sanitized export
+1. **Historic rule70 proposal:** `origin=sillapa70`, `option_id=rule70:s70-...`, activity name, category, level and `source_pdf_url/source_pdf_page`. These do not depend on AcademicCompetitionManager IDs.
+2. **Current competition catalog (optional and separately imported):** `origin=competition74` (or documented other competition source), with `option_id=competition74:<source_activity_id>:<source_level_code>`. Exact escaping and unique namespaced encoding must be decided and tested by implementation; do not concatenate arbitrary unescaped ID strings in production.
 
-Prepare private file **outside Git** (example, made-up data shown below, do not use these IDs in production):
+An administrative reviewer explicitly selects which individual options enter a round; some may look alike across sources. **No automatic joining, name-based reconciliation, or replacement**. The admin UI can warn on similar labels but must never auto-merge or hide either source. UI should show a clear source-year badge, source PDF link and level/subtype. One round item = one **approved `option_id`**. Ballot uniqueness = `(round_id, option_id, cluster_id)`, and each eligible cluster gets one vote per selected option. Existing YES/NO/ABSTAIN policy and certification gates remain intact.
 
-```json
-[
-  {"activity_id":"TEST-act004","name":"คัดลายมือสื่อภาษาไทย","level_code":"ป.1-ป.3","category":"ภาษาไทย"}
-]
-```
+**Do not interpret the 70 rule text as the official 74 competition rules.** These are historical candidate labels for a local selection vote.
 
-Then, in a local checkout:
+## What is finished vs pending
+
+| Part | State |
+| --- | --- |
+| PR #3 VOTE-2A: 18 PDF links and 126 draft candidate×levels | MERGED `ff9a8e2` |
+| Original PDF summary audit / counts all 18 categories | CATALOG DATA PRESENT, manual validation still necessary |
+| 37 family examples for the 5 previously empty source categories | REVIEW ONLY, not flattened into votes |
+| 126 source-specific independent option proposals | GENERATED, all `DRAFT_REVIEW_REQUIRED` |
+| Offline generator and integrity CI | IMPLEMENTED, check actual GitHub run |
+| Full row-by-row extraction of all 18 PDFs | **NOT COMPLETE** |
+| Source spelling, levels, subtype/gender, applicable สพป. scope review | **NOT COMPLETE** |
+| Admin approve/exclude and freeze into round snapshot | Future VOTE-2C, after VOTE-1 Build passes |
+| Voter authentication and submission | Future VOTE-3 |
+| Production deployment | NOT AUTHORIZED |
+
+## Preview commands
 
 ```bash
 node tools/validate_rule70_catalog.mjs
-node --test tests/rule70_coverage.test.mjs tests/rule70_crosswalk.test.mjs
-node tools/reconcile_rule70.mjs --master /secure/private/activities-levels.json --candidates catalog/rule70/candidate_items.json > /secure/private/reconciliation-draft.json
+node tools/prepare_rule70_options.mjs > rule70-options-review.json
+node --test tests/rule70_coverage.test.mjs tests/rule70_options.test.mjs
 ```
 
-The output contains a **candidate-to-canonical suggested match table**, not approved canonical mapping. It rejects student/teacher/PII-like extra fields and duplicate master keys. Keep the master and output in private storage; they are not committed to GitHub.
+The generated review file is **not a ballot import**. It may be used by VOTE-2C as the first *source-specific* options catalog after an admin verifies names/levels and explicitly selects items into a voting round.
 
-### Decisions requiring an operator
+## Remaining tasks before VOTE-2B closure
 
-- `ONE_EXACT_NAME_AND_LEVEL_SUGGESTION`: compare PDF/scope, **not auto-approve**.
-- `AMBIGUOUS_MULTIPLE_CANONICAL_MATCHES`: manual choice or mark unresolved.
-- `SAME_NAME_DIFFERENT_LEVEL`: do not merge levels automatically.
-- `NO_EXACT_NAME_MATCH`: decide new approved activity, renamed activity or exclude after inspecting source.
-- Families with missing level/disability/age scope **do not go through this candidate matcher** until an approved scoped catalog exists.
+1. Audit all original PDFs and complete every eligible (activity × level × relevant subtype) candidate, with source page links and school-jurisdiction constraints; separate special education disability/age variants correctly.
+2. Check/repair all 126 staged titles and levels against PDFs; flag obviously non-SPP sources. Do not claim they are already verified.
+3. Make a reviewed source-specific catalog and provide an admin review/selection UI in VOTE-2C. Exclusion is not a NO ballot.
+4. Block READY/OPEN unless the authorized item snapshot, eligible cluster roster and actual quorum/majority policy are signed off.
+5. Do not connect to or modify AcademicCompetitionManager or Production 73. **No master export is needed.**
 
-## What remains before VOTE-2B can close
-
-- [ ] Complete exact row-by-row extraction for **all 18 source PDFs** (including all special subtypes) with source pages, column-level jurisdiction and applicable age/disability dimensions.
-- [ ] Review/amend 126 preliminary candidate rows against actual PDFs (names, levels, team/gender distinctions).
-- [ ] Obtain privacy-safe authoritative master export for #73/#74 and freeze source commit/hash/count.
-- [ ] Run reconciler; operators review every ambiguous/new/matched ID, sign off approve/exclude lists.
-- [ ] Agree SPP scope and whether special categories should be included at all.
-- [ ] Produce exact deduplicated `(round, canonical ID, level, subtype/scope)` proposal and approve item snapshot for VOTE-2C.
-
-**No real-ready item or complete crosswalk is claimed by this PR.** PR #2 remains blocked at Vite React Build; no dependency is introduced from this data branch into PR #2.
-
-## Next workflow
-
-VOTE-2B continues with verified source-completeness passes and sanitized master. VOTE-2C implements admin import preview after VOTE-1 Build issue resolved. VOTE-3 stays closed until roles/policy are ratified.
-
-## Read-only master export handoff
-
-Exact operator steps and a sanitized SQL SELECT are in [VOTE_2B_MASTER_EXPORT_HANDOFF.md](VOTE_2B_MASTER_EXPORT_HANDOFF.md). The user needs a private authorized export only when they want to resolve real #73/#74 IDs; this PR does not access their database.
+The VOTE-1 PR #2 remains OPEN and its frontend React/Vite build failure remains a separate blocker to running the application. This catalog PR can pass CI without changing that fact.

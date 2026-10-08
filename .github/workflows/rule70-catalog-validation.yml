@@ -5,8 +5,7 @@ on:
     paths:
       - 'catalog/rule70/**'
       - 'tools/validate_rule70_catalog.mjs'
-      - 'tools/reconcile_rule70.mjs'
-      - 'tools/convert_activity_master_csv.mjs'
+      - 'tools/prepare_rule70_options.mjs'
       - 'tests/rule70_*.test.mjs'
       - '.github/workflows/rule70-catalog-validation.yml'
   push:
@@ -14,7 +13,7 @@ on:
     paths:
       - 'catalog/rule70/**'
       - 'tools/validate_rule70_catalog.mjs'
-      - 'tools/reconcile_rule70.mjs'
+      - 'tools/prepare_rule70_options.mjs'
       - 'tests/rule70_*.test.mjs'
       - '.github/workflows/rule70-catalog-validation.yml'
   workflow_dispatch:
@@ -30,7 +29,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Validate historical candidate source provenance and safety
+      - name: Validate historic candidates and PDF source references
         run: node tools/validate_rule70_catalog.mjs
-      - name: Test VOTE-2B source coverage and safe crosswalk suggestions
-        run: node --test tests/rule70_coverage.test.mjs tests/rule70_crosswalk.test.mjs tests/rule70_csv.test.mjs
+      - name: Test source coverage and independent option generator
+        run: node --test tests/rule70_coverage.test.mjs tests/rule70_options.test.mjs
