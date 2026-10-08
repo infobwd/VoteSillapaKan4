@@ -30,6 +30,15 @@ Source reference: https://github.com/infobwd/AcademicCompetitionManager
 
 Before importing data inspect its latest canonical branch, source code and schema. Do not rely on its older main baseline without verification. Use read-only versioned CSV/JSON import of activity, levels and cluster master lists; preserve opaque source IDs. No write access to Production 73, historical scores, teams, results or judges.
 
+## Implementation progress (VOTE-1 candidate)
+
+- **VOTE-0** design lock: merged in PR #1.
+- **VOTE-1** scaffold/CI: under review in a separate implementation branch; no voting or login endpoints.
+- Frontend: React/TypeScript/Vite Thai mobile-first landing indicating voting is not open.
+- Backend: PHP `GET api/?action=health` reports PHP liveness with `votingEnabled:false`; `action=ready` checks a separately configured test DB/bootstrap only.
+- Repository smoke checks: `npm test`, `npm run build`, `php tests/php_contract_test.php`; isolated MariaDB smoke test runs in CI.
+- [VOTE-1 staging/local handoff](docs/VOTE_1_STAGING_HANDOFF.md). No Production GO or server instructions authorized by a docs merge.
+
 ## Development lifecycle
 
 Before every coding task check latest GitHub main, open PRs, CI, README and design/policy documents.

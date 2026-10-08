@@ -1,0 +1,69 @@
+name: VoteSillapaKan4 VOTE-1 CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  frontend:
+    name: Frontend typecheck, tests and builds
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install pinned top-level dependencies
+        run: npm install --no-audit --no-fund
+      - name: Static scaffold tests
+        run: npm test
+      - name: Root-path production build
+        run: npm run build
+      - name: Subpath production build
+        run: APP_BASE=/vote-staging/ npm run build
+      - name: Assert no votes or admin bundle endpoints
+        run: |
+          ! grep -R -E 'submitBallot|castVote|voteSubmit' src
+          test -f dist/index.html
+
+  api-and-db:
+    name: PHP contract and isolated MariaDB bootstrap
+    runs-on: ubuntu-latest
+    services:
+      mariadb:
+        image: mariadb:10.11
+        ports:
+          - 3306:3306
+        env:
+          MARIADB_ROOT_PASSWORD: synthetic_ci_only
+          MARIADB_DATABASE: vote_ci
+        options: >-
+          --health-cmd="healthcheck.sh --connect --innodb_initialized"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=10
+    env:
+      VOTE_DB_HOST: 127.0.0.1
+      VOTE_DB_PORT: '3306'
+      VOTE_DB_NAME: vote_ci
+      VOTE_DB_USER: root
+      VOTE_DB_PASSWORD: synthetic_ci_only
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: pdo_mysql
+          coverage: none
+      - name: PHP syntax checks
+        run: |
+          find api tests -type f -name '*.php' -print0 | xargs -0 -n1 php -l
+      - name: API contract
+        run: php tests/php_contract_test.php
+      - name: Verify migration on disposable MariaDB
+        run: php tests/db_smoke.php

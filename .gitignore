@@ -1,0 +1,15 @@
+node_modules/
+dist/
+coverage/
+.env
+.env.*
+!.env.example
+api/config.php
+storage/
+db/seed/
+*.sql.gz
+*.dump
+*.bak
+*.log
+.DS_Store
+.vscode/
