@@ -116,3 +116,20 @@ jobs:
           echo "::group::REACT WITHOUT CSS BUILD"
           timeout 16s npx vite build || echo "REACT_NO_CSS_FAILED:$?"
           echo "::endgroup::"
+
+  rollup-compat-probe:
+    name: Diagnostic Rollup compatibility (temporary)
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install locked base dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Test known earlier Rollup release with React entry
+        run: |
+          npm install --no-save --no-audit --no-fund rollup@4.42.0
+          node -e "console.log('rollup:',require('rollup/package.json').version)"
+          timeout 30s npx vite build
