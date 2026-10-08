@@ -142,3 +142,9 @@ Source: https://sillapa.net/home/sillapa70-rule/ — the 18 primary PDFs are arc
 - **VOTE-2C:** admin preview and controlled opt-in into frozen round item snapshot. Until B complete, imported draft must be excluded from real vote.
 - No automatic PDF scraping in user browser, no direct DB writes into AcademicCompetitionManager, no copying entire rule PDFs into public repo.
 - See [SILLAPA70_CATALOG_INTEGRATION.md](SILLAPA70_CATALOG_INTEGRATION.md) for remaining categories and safeguards.
+
+## 10. VOTE-2B actual audit progress, 2026-10-08
+
+- Follow-on source-audit PR after #3 merges. Includes read-only 18-category coverage, additional historical parent activities, and an offline suggestion-only master matcher.
+- **Not complete**: extract every source row, confirm source levels/scope and special-type dimensions, reconcile against an authorized sanitized activity master. Published PDF aggregate totals are not individual eligible ballot counts.
+- Before VOTE-2C live catalog admin UI, require detailed [VOTE-2B checklist](VOTE_2B_SOURCES_AND_CROSSWALK.md), signed reviews, and successful VOTE-1 frontend CI.

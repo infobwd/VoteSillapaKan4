@@ -5,12 +5,16 @@ on:
     paths:
       - 'catalog/rule70/**'
       - 'tools/validate_rule70_catalog.mjs'
+      - 'tools/reconcile_rule70.mjs'
+      - 'tests/rule70_*.test.mjs'
       - '.github/workflows/rule70-catalog-validation.yml'
   push:
     branches: [main]
     paths:
       - 'catalog/rule70/**'
       - 'tools/validate_rule70_catalog.mjs'
+      - 'tools/reconcile_rule70.mjs'
+      - 'tests/rule70_*.test.mjs'
       - '.github/workflows/rule70-catalog-validation.yml'
   workflow_dispatch:
 
@@ -25,5 +29,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Confirm candidate items and source provenance
+      - name: Validate historical candidate source provenance and safety
         run: node tools/validate_rule70_catalog.mjs
+      - name: Test VOTE-2B source coverage and safe crosswalk suggestions
+        run: node --test tests/rule70_coverage.test.mjs tests/rule70_crosswalk.test.mjs

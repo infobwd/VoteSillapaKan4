@@ -92,3 +92,7 @@ Before implementation of import ETL:
 [Historical Sillapa 70 catalog integration](SILLAPA70_CATALOG_INTEGRATION.md) adds a **second supplementary historical source**, separate from AcademicCompetitionManager canonical activities. The historical PDF-derived `candidate_id` is not an `activity_id`. Import must reconcile each candidate into MATCHED (existing canonical activity × level), NEW_APPROVED (explicitly new canonical identity), or EXCLUDED (not applicable). The VOTE-2 admin preview must display source links and prevent duplicates before creating approved `round_items`.
 
 As of 2026-10-08 only 13/18 PDF categories have partial candidate extraction. No `eligible_for_live_vote` flag may be toggled from file import alone. Special education source structure needs independent scope/age/disability design review. Do not import PDF full texts or alter Production 73.
+
+## 10. Reconciliation safety rules / VOTE-2B
+
+Historical `source_family_id` and `candidate_id` are **not** canonical `activity_id`. Offline `tools/reconcile_rule70.mjs` generates suggested exact-name/exact-level matches against explicitly provided, **privacy-safe** #73/#74 master exports. Every result remains REVIEW_REQUIRED and cannot be used in a voting round without operator approval. For special education items, `activity_id+level_code` must be extended to an approved subtype/age/disability scope before a unique voting item can be defined. See [VOTE-2B source audit](VOTE_2B_SOURCES_AND_CROSSWALK.md).

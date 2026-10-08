@@ -51,3 +51,9 @@ Approved eligible clusters, exact activity-level selection, quorum threshold and
 - ตรวจด้วย `node tools/validate_rule70_catalog.mjs`; ไม่มีโหวตจริง ไม่มีการเขียนฐานข้อมูล
 
 **ห้ามนำรายการเกณฑ์ 70 ไปโหวตจริงหรือใช้แทนเกณฑ์ครั้งที่ 74 จนกว่าจะตรวจหมวดที่เหลือ เทียบกิจกรรมครั้งที่ 73/74 และรับรองรอบโดยเจ้าหน้าที่.**
+
+## VOTE-2B source audit & crosswalk (parallel data branch)
+
+`docs/VOTE_2B_SOURCES_AND_CROSSWALK.md` documents **18 official PDF overviews**, adds **37 further family-stage entries** (not ballots) across the 5 previously empty categories, and provides a strict offline **suggestion-only** crosswalk tool for authorized sanitized #73/#74 activity×level exports.
+
+This VOTE-2B data PR **does NOT finish the 18-PDF complete item extraction**, does not approve actual canonical activity matches, and does not enable voting. Some special education categories require disability/age scope beyond the standard level code. The #73/#74 canonical activity IDs cannot be safely inferred from the production-excluded seed data in AcademicCompetitionManager. The remaining checklist is in the VOTE-2B document.
