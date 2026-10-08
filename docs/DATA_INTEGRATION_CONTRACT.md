@@ -86,3 +86,17 @@ Before implementation of import ETL:
 - Votes, revisions, policies, decisions, audit = authoritative in VoteSillapaKan4 only.
 - Back up and restore separately; secrets and real CSV data excluded from repository.
 - To build the future competition setup, export **certified aggregate decision list** for a person to review; never update 74 activities automatically without an explicit integration/change-approval project.
+
+
+## 9. Updated contract — archived #70 options independent of AcademicCompetitionManager (Owner 2026-10-08)
+
+**Only competition-source activity/level imports** require ActivityCompetitionManager canonical `activity_id` + `level_code` per §§1–8. The historical #70 catalog is a **separate option origin** and must not require a crosswalk, CSV/SQL export or any connection to Production 73.
+
+- Archived rule70 option: `option_id=rule70:<source candidate_id>`, `origin=sillapa70`, historical source PDF and document page, activity/title/category/level snapshot. `source_activity_id` is **NULL / N/A**.
+- Later competition catalog option (if used): its own namespace and preserved source IDs; no auto matching to rule70.
+- The voting round uses `(round_id, option_id)` as the unique item. A cluster submission uniquely keys `(round_id, option_id, cluster_id)`.
+- A similarly named item from different origins remains distinct. Admin-controlled inclusion, with source warning, prevents accidental duplication; no name-based merge.
+- Historical candidates are **review-only** until source PDF, level/variant/school-scope and authorization confirmed. 126 partial staged items do not automatically enter live rounds.
+- No source-system writes of any kind.
+
+See [SILLAPA70_CATALOG_INTEGRATION.md](SILLAPA70_CATALOG_INTEGRATION.md) and [VOTE-2B source options](VOTE_2B_SOURCES_AND_CROSSWALK.md).

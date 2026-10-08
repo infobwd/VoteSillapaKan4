@@ -108,3 +108,8 @@ Meeting resolution (separate record) = ARRANGE / DO_NOT_ARRANGE / DEFER / EXEMPT
 - Policy version/checksum:
 
 Without an approved record, the system must permit only **preview/synthetic staging tests**, not a real vote round.
+
+
+## 10. Independent historical options (Owner direction 2026-10-08)
+
+Archived competition #70 (academic year 2565) activities are standalone **proposal options** with their own source-namespaced `option_id`, without a link to #73/#74 master activities. They remain non-voting until manually reviewed and chosen into the approved round-item snapshot. One cluster still gets one ballot per `(round_id, option_id)`, with the same YES/NO/ABSTAIN/MISSING definitions. Different source options with similar labels are not auto-merged; admins must see source-year labels and intentionally choose included questions. The historical PDF is never an authoritative #74 scoring regulation.

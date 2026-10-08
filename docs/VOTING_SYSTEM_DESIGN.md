@@ -61,7 +61,7 @@ Round: DRAFT -> READY -> OPEN -> CLOSED -> CERTIFIED -> PUBLISHED (publication o
 - Unique ballot: (round_id, round_item_id, cluster_id). Use DB uniqueness + transaction + idempotency key.
 - A ballot can hold YES/NO/ABSTAIN only. No value means MISSING.
 - Draft is not a submitted ballot. Subsequent edits create append-only ballot revision event and update current logical ballot atomically.
-- One item = canonical source activity_id + level_code; IDs are opaque UTF-8 strings (do not cast to integers or normalize away leading zeros).
+- One item = approved stable **option_id** with a source namespace. For canonical competition import, preserve opaque source activity/level strings; for historical rule70 alternatives, use independent `rule70:s70-...` option IDs and DO NOT require mapping.
 - CLOSE captures calculated tally, immutable version/hash and closer identity/time.
 - No silent reopen. If formal re-vote is required, create a linked successor round with explicit authority/reason (implementation may be later PR).
 - CERTIFIED stores resolution separately from computed vote and permits reasoned exceptions; publishing never leaks raw PII.
@@ -73,7 +73,7 @@ Round: DRAFT -> READY -> OPEN -> CLOSED -> CERTIFIED -> PUBLISHED (publication o
 - activity_catalog / activity_levels / cluster_catalog (source IDs, display snapshots, import version)
 - accounts, auth_sessions, cluster_memberships, delegations (scope, role, validity, revocation)
 - voting_rounds (status, opens_at, closes_at, rule_version, rule_hash, roster_snapshot_hash)
-- round_items (round_id, item_id, source_activity_id, level_code, name/category snapshot, inclusion reason)
+- round_items (round_id, option_id, origin, nullable source_activity_id, level_code, optional subtype/scope, name/category/source PDF snapshot, inclusion reason)
 - eligible_clusters (round_id, source_cluster_id, group name snapshot, approved voter mapping)
 - ballot_drafts (private, excluded from tally)
 - ballots (round_id, item_id, cluster_id, choice, revision, submitted_at, actor_id)
@@ -117,3 +117,10 @@ No selecting cluster-vs-area route (Option B), host/site votes (Option C), budge
 ## 10. Review/approval gate
 
 Approve design scope and threat boundaries first. Separately ratify VOTING_POLICY.md policy fields and acceptance roster before implementing real OPEN. See DATA_INTEGRATION_CONTRACT.md and IMPLEMENTATION_PLAN.md. This document is a proposal, not authorization to merge/deploy or run production DB changes.
+
+
+## 11. Design Lock amendment: rule70 option source (Owner decision 2026-10-08)
+
+Historical #70 PDF items are **supplementary standalone candidate options** for the #74 area-level vote, not required to map to AcademicCompetitionManager activities. Their vote identity is a source-namespaced `option_id`. The `source_activity_id` field is nullable / not applicable for this source. Each round selects approved options, and `(round_id, option_id, cluster_id)` is the uniqueness scope. Present historical year and source PDF clearly; do not imply the archived PDF defines current #74 competition rules. When both archives and current competition catalogs contain a similar activity, **do not merge by name**; admins decide whether to include one, both or neither. Full VOTE-2B detail audit and VOTE-2C admin selection still required. See [rule70 source policy](SILLAPA70_CATALOG_INTEGRATION.md).
+
+This specific change supersedes *only* original references implying every round item must carry a canonical AcademicCompetitionManager activity ID. Other design lock rules remain unchanged.

@@ -132,3 +132,15 @@ Option B stage-selection, Option C venue/host selection, integration that writes
 3. Treat Design Lock + Policy Ratification Gate as constraints.
 4. Begin only VOTE-1 on feature branch, add tests, open PR, request review; no auto-merge/deploy.
 5. If business policy remains unsigned, implement synthetic tests and READY guards but do not enable real OPEN.
+
+
+## 9. Historic rule70 standalone option stream (Owner update 2026-10-08)
+
+**The user does not require matching #70 activities to #73/#74.** Historical #70 criteria are *optional labels to propose for voting*, with source-specific IDs. Do not gate the Rule70 source on private export of canonical master, and do not require match/reconcile tools.
+
+- VOTE-2A: merged PR #3 provided 18 PDF sources and 126 partial draft candidate×level records.
+- VOTE-2B: source-overview audit and 37 supplementary family examples; **generate 126 independent `rule70:` option proposals**, preserve PDF links and scope. Full row-by-row extraction and source validation are still pending. No automatic activation.
+- VOTE-2C (after VOTE-1 frontend CI PASS): admin lists source sets separately, reviews, excludes or selects options by unique `option_id`, locks immutable round snapshot; do not merge similar names across different sources.
+- VOTE-3: voting scoped to `(round_id, option_id, cluster_id)`, same one-group-one-vote rule, policy ratification and audit.
+- VOTE-4/VOTE-5: computed results and human certification, separated from any changes to AcademicCompetitionManager. Historical PDFs never substitute for #74 regulations.
+- **No requirement for `activity_id` from #73/74, no database master CSV export, no name matching.**
