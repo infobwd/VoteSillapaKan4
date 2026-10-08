@@ -6,7 +6,7 @@ const src=readFileSync(new URL('../src/App.tsx',import.meta.url),'utf8');
 const options=JSON.parse(readFileSync(new URL('../catalog/rule70/option_proposals_v2b.json',import.meta.url),'utf8'));
 test('Viewer uses independent historical option IDs and filters by source and grade',()=>{
  assert.match(src,/historicalOptions\.options/);
- assert.match(src,/option\.option_id/);
+ assert.match(src,/item\.option_id/);
  assert.match(src,/option\.category_id/);
  assert.match(src,/option\.level_code/);
  assert.match(src,/type="search"/);
