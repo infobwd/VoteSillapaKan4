@@ -144,3 +144,12 @@ Option B stage-selection, Option C venue/host selection, integration that writes
 - VOTE-3: voting scoped to `(round_id, option_id, cluster_id)`, same one-group-one-vote rule, policy ratification and audit.
 - VOTE-4/VOTE-5: computed results and human certification, separated from any changes to AcademicCompetitionManager. Historical PDFs never substitute for #74 regulations.
 - **No requirement for `activity_id` from #73/74, no database master CSV export, no name matching.**
+
+
+## 11. VOTE-2C1 — Read-only website source catalog preview
+
+Following VOTE-1 merged code, first UI increment provides public, read-only source catalog previews from `option_proposals_v2b.json`. Filter/search by category and grade, 12 per page, PDF provenance and draft status. This does **not** add voting, login, server-side review, round approval or write endpoints. Source items remain marked pending.
+- `src/App.tsx` imports the local staged historical dataset and renders preview only with clear archival year and no tally.
+- No #73/#74 matching/export; each option retains `rule70:` namespace.
+- VOTE-2C2 will implement secured admin verification, item exclusion/inclusion and round snapshot AFTER identity/authorization system is designed and tested.
+- No Production/host deployment from PR merge. Manual screenshot/browser checks at 320px/iPad/desktop remain owner staging acceptance tasks.
