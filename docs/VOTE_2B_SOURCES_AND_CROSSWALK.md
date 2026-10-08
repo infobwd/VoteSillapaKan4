@@ -90,3 +90,7 @@ The output contains a **candidate-to-canonical suggested match table**, not appr
 ## Next workflow
 
 VOTE-2B continues with verified source-completeness passes and sanitized master. VOTE-2C implements admin import preview after VOTE-1 Build issue resolved. VOTE-3 stays closed until roles/policy are ratified.
+
+## Read-only master export handoff
+
+Exact operator steps and a sanitized SQL SELECT are in [VOTE_2B_MASTER_EXPORT_HANDOFF.md](VOTE_2B_MASTER_EXPORT_HANDOFF.md). The user needs a private authorized export only when they want to resolve real #73/#74 IDs; this PR does not access their database.
