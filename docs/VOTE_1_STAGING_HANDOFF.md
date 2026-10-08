@@ -74,3 +74,18 @@ PHP receives `VOTE_DB_HOST, VOTE_DB_PORT, VOTE_DB_NAME, VOTE_DB_USER, VOTE_DB_PA
 Diagnostics: Vite minimal HTML/JS and DOM-only app build in <1s; full React app hangs even without CSS. Isolated comparison with Vite 6.3.6 and Rollup 4.42.0 also hung. This narrows the problem to the React/module bundling graph or toolchain interaction, **not** a confirmed version-specific root cause. Keep testing without changing Production, and do not treat shortened timeout as remediation.
 
 See [VOTE_1_CI_INVESTIGATION.md](VOTE_1_CI_INVESTIGATION.md) for reproducible evidence and next steps.
+
+
+## Production bundle fallback for VOTE-1 (CI-gated)
+
+While Vite remains the development server, production `npm run build` uses the pinned esbuild `scripts/build.mjs` due the isolated ReactDOM/Vite hang. It produces a JavaScript bundle, CSS bundle, and rewritten `dist/index.html` with proper base path. In a clean checkout `npm ci` installs locked dependencies, then:
+
+```bash
+npm test
+npm run build
+node tests/check_build_output.mjs /
+APP_BASE=/vote-staging/ npm run build
+node tests/check_build_output.mjs /vote-staging/
+```
+
+Verify link paths and `api/?action=health` staging route separately; frontend health text can be unavailable until PHP is configured. No real voting features are enabled. **No host rollout follows from a build PASS alone**.

@@ -24,8 +24,12 @@ jobs:
         run: npm test
       - name: Root-path production build
         run: timeout 60s npm run build
+      - name: Check root output links and bundled assets
+        run: node tests/check_build_output.mjs /
       - name: Subpath production build
         run: APP_BASE=/vote-staging/ npm run build
+      - name: Check subpath output links and bundled assets
+        run: node tests/check_build_output.mjs /vote-staging/
       - name: Assert no votes or admin bundle endpoints
         run: |
           ! grep -R -E 'submitBallot|castVote|voteSubmit' src
@@ -67,44 +71,3 @@ jobs:
         run: php tests/php_contract_test.php
       - name: Verify migration on disposable MariaDB
         run: php tests/db_smoke.php
-
-  react-graph-diagnostics:
-    name: Isolate Vite and React production transforms
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-      - run: npm ci --no-audit --no-fund
-      - name: Minimal React imports vs Vite and esbuild bundling
-        shell: bash
-        run: |
-          set +e
-          set -u
-          mkdir -p .react-diagnostics
-          cat > .react-diagnostics/index.html <<'HTML'
-          <!doctype html><html><body><div id="root"></div><script type="module" src="/entry.jsx"></script></body></html>
-          HTML
-          declare -a cases=("react" "reactdom" "jsx" "combined")
-          for case in "${cases[@]}"; do
-            case "$case" in
-              react) printf 'import * as React from "react"; document.querySelector("#root").textContent = React.version;\n' > .react-diagnostics/entry.jsx;;
-              reactdom) printf 'import { createRoot } from "react-dom/client"; document.querySelector("#root").textContent = String(typeof createRoot);\n' > .react-diagnostics/entry.jsx;;
-              jsx) printf 'import { jsx } from "react/jsx-runtime"; document.querySelector("#root").textContent = String(typeof jsx);\n' > .react-diagnostics/entry.jsx;;
-              combined) printf 'import React from "react"; import { createRoot } from "react-dom/client"; createRoot(document.querySelector("#root")).render(React.createElement("p",null,"OK"));\n' > .react-diagnostics/entry.jsx;;
-            esac
-            echo "::group::VITE-${case}"
-            timeout 14s ./node_modules/.bin/vite build .react-diagnostics --outDir "../.react-diagnostics-output-${case}" --emptyOutDir --logLevel info
-            rc=$?
-            echo "VITE_CASE_${case}_EXIT=${rc}"
-            echo "::endgroup::"
-          done
-          echo "::group::ESBUILD_FULL_REACT_GRAPH"
-          timeout 15s ./node_modules/.bin/esbuild src/main.tsx --bundle --outfile=/tmp/vote-esbuild-react.js --platform=browser --format=esm --log-level=info
-          echo "ESBUILD_FULL_EXIT=$?"
-          echo "::endgroup::"
-          echo "::group::PROCESS CHECK"
-          ps -eo pid,ppid,stat,comm,args | grep -E 'vite|esbuild|node' | head -40 || true
-          echo "::endgroup::"
-          exit 0

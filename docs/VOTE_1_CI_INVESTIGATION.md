@@ -38,3 +38,12 @@ A Vite build of the minimal source works, while the full React import graph hang
 | VOTE-1 acceptance / merge | **BLOCKED** |
 
 No real votes, users, master data import or source Production DB touched.
+
+
+## Resolution proposal & confirmed diagnostic evidence (2026-10-08)
+
+New [workflow diagnostic run](https://github.com/infobwd/VoteSillapaKan4/actions/runs/37751720680) isolated the hang to `react-dom/client`: minimal Vite `react` import **PASS** (~0.2s), `react/jsx-runtime` **PASS** (~0.13s), `react-dom/client` **TIMEOUT 14s**, `react+react-dom/client` **TIMEOUT 14s**. Direct **esbuild full React app bundle PASS (39ms)**, with both JavaScript and stylesheet assets generated.
+
+With root cause constrained to the Vite/Rollup processing path for ReactDOM imports **but no exact internal plugin bug proven**, the VOTE-1 scaffold switches only **Production static bundling** to the pinned, already transitive `esbuild@0.25.12`. **Vite remains the development server** for `npm run dev` and preview. The release script `scripts/build.mjs` bundles `src/main.tsx` with React and CSS, inlines `import.meta.env.BASE_URL`, writes source-template HTML with root/subpath references and removes stale output. `tests/check_build_output.mjs` requires the emitted links/assets and Thai closed-voting banner for both bases. Tests must pass through full GitHub CI; no claims until verified.
+
+Original failed-run history above is retained. **Do not merge on diagnostic success alone**, require successful full VOTE-1 CI. Future VOTE-2/3 may revisit Vite build once upstream package/plugin root cause isolated, but must not weaken release reproducibility or React dependency isolation.
